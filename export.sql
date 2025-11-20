@@ -83,7 +83,7 @@ CREATE TABLE `Ingrediente` (
   `stock` int NOT NULL,
   `minimoStock` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -107,7 +107,7 @@ CREATE TABLE `Mesa` (
   `id` int NOT NULL AUTO_INCREMENT,
   `cantPersonas` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -218,7 +218,7 @@ CREATE TABLE `Pedido` (
   KEY `idSucursal` (`idSucursal`),
   CONSTRAINT `Pedido_ibfk_1` FOREIGN KEY (`dniCliente`) REFERENCES `Cliente` (`dni`),
   CONSTRAINT `Pedido_ibfk_2` FOREIGN KEY (`idSucursal`) REFERENCES `Sucursal` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -247,7 +247,7 @@ CREATE TABLE `Plato` (
   PRIMARY KEY (`id`),
   KEY `idNocheTematica` (`idNocheTematica`),
   CONSTRAINT `Plato_ibfk_1` FOREIGN KEY (`idNocheTematica`) REFERENCES `NocheTematica` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -301,7 +301,7 @@ CREATE TABLE `PreferenciasAlimenticiasDelCliente` (
   KEY `dniCliente` (`dniCliente`),
   CONSTRAINT `PreferenciasAlimenticiasDelCliente_ibfk_1` FOREIGN KEY (`idPreferenciasAlimenticias`) REFERENCES `PreferenciasAlimenticias` (`id`),
   CONSTRAINT `PreferenciasAlimenticiasDelCliente_ibfk_2` FOREIGN KEY (`dniCliente`) REFERENCES `Cliente` (`dni`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -330,7 +330,7 @@ CREATE TABLE `PreferenciasAlimenticiasDelPlato` (
   KEY `idPlato` (`idPlato`),
   CONSTRAINT `PreferenciasAlimenticiasDelPlato_ibfk_1` FOREIGN KEY (`idPreferenciasAlimenticias`) REFERENCES `PreferenciasAlimenticias` (`id`),
   CONSTRAINT `PreferenciasAlimenticiasDelPlato_ibfk_2` FOREIGN KEY (`idPlato`) REFERENCES `Plato` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -386,7 +386,7 @@ CREATE TABLE `Reserva` (
   KEY `idPedido` (`idPedido`),
   CONSTRAINT `Reserva_ibfk_1` FOREIGN KEY (`idCalificacion`) REFERENCES `Calificacion` (`id`),
   CONSTRAINT `Reserva_ibfk_2` FOREIGN KEY (`idPedido`) REFERENCES `Pedido` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -466,7 +466,7 @@ CREATE TABLE `ingredientesDePlatos` (
   KEY `idPlato` (`idPlato`),
   CONSTRAINT `ingredientesDePlatos_ibfk_1` FOREIGN KEY (`idIngrediente`) REFERENCES `Ingrediente` (`id`),
   CONSTRAINT `ingredientesDePlatos_ibfk_2` FOREIGN KEY (`idPlato`) REFERENCES `Plato` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=87 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -495,7 +495,7 @@ CREATE TABLE `mesasPedidos` (
   KEY `idPedido` (`idPedido`),
   CONSTRAINT `mesasPedidos_ibfk_1` FOREIGN KEY (`idMesa`) REFERENCES `Mesa` (`id`),
   CONSTRAINT `mesasPedidos_ibfk_2` FOREIGN KEY (`idPedido`) REFERENCES `Pedido` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -519,6 +519,7 @@ CREATE TABLE `platosDelPedido` (
   `id` int NOT NULL AUTO_INCREMENT,
   `idPedido` int NOT NULL,
   `idPlato` int NOT NULL,
+  `cantPlatos` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `idPedido` (`idPedido`),
   KEY `idPlato` (`idPlato`),
@@ -533,7 +534,7 @@ CREATE TABLE `platosDelPedido` (
 
 LOCK TABLES `platosDelPedido` WRITE;
 /*!40000 ALTER TABLE `platosDelPedido` DISABLE KEYS */;
-INSERT INTO `platosDelPedido` VALUES (1,1,1),(2,1,2),(3,2,2),(4,3,3),(5,4,4),(6,5,5),(7,6,6),(8,7,7),(9,8,8),(10,9,9),(11,10,10),(12,11,11),(13,12,12),(14,13,13),(15,14,14),(16,15,15),(17,2,1),(18,5,3),(19,8,6),(20,12,7),(21,3,7),(22,10,4),(23,1,12),(24,8,2),(25,14,9),(26,6,11),(27,2,5),(28,9,14),(29,11,3),(30,4,8),(31,7,13),(32,12,6),(33,5,10),(34,15,1),(35,13,15),(36,3,9),(37,8,4),(38,10,7),(39,6,2),(40,11,12),(41,2,3),(42,4,3),(43,7,3),(44,10,3),(45,12,3),(46,1,7),(47,5,7),(48,9,7),(49,11,7),(50,14,7),(51,3,10),(52,6,10),(53,8,10),(54,13,10),(55,4,12),(56,7,12),(57,9,12),(58,11,12),(59,15,3),(60,6,7);
+INSERT INTO `platosDelPedido` VALUES (1,1,1,3),(2,1,2,2),(3,2,2,1),(4,3,3,1),(5,4,4,1),(6,5,5,1),(7,6,6,1),(8,7,7,1),(9,8,8,1),(10,9,9,2),(11,10,10,1),(12,11,11,1),(13,12,12,2),(14,13,13,1),(15,14,14,4),(16,15,15,1),(17,2,1,3),(18,5,3,1),(19,8,6,1),(20,12,7,1),(21,3,7,1),(22,10,4,1),(23,1,12,1),(24,8,2,1),(25,14,9,1),(26,6,11,1),(27,2,5,1),(28,9,14,2),(29,11,3,1),(30,4,8,1),(31,7,13,2),(32,12,6,4),(33,5,10,3),(34,15,1,1),(35,13,15,1),(36,3,9,1),(37,8,4,2),(38,10,7,1),(39,6,2,1),(40,11,12,1),(41,2,3,1),(42,4,3,1),(43,7,3,1),(44,10,3,1),(45,12,3,1),(46,1,7,1),(47,5,7,1),(48,9,7,1),(49,11,7,1),(50,14,7,1),(51,3,10,1),(52,6,10,1),(53,8,10,1),(54,13,10,1),(55,4,12,1),(56,7,12,1),(57,9,12,1),(58,11,12,1),(59,15,3,1),(60,6,7,1);
 /*!40000 ALTER TABLE `platosDelPedido` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -546,4 +547,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-11-20  8:45:57
+-- Dump completed on 2025-11-20 10:12:19
